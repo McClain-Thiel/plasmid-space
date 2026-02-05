@@ -8,6 +8,7 @@ sdk_version: 4.0.0
 app_file: app.py
 pinned: false
 license: mit
+private: true
 ---
 
 # Plasmid-GPT: AI-Powered Plasmid Design 🧬

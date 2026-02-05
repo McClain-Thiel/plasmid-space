@@ -18,6 +18,18 @@ from utils import (
     analyze_sequence
 )
 
+# Import spaces for GPU support on HuggingFace Spaces
+try:
+    import spaces
+    HF_SPACES_GPU = True
+except ImportError:
+    # Not running on HF Spaces, create dummy decorator
+    class spaces:
+        @staticmethod
+        def GPU(func):
+            return func
+    HF_SPACES_GPU = False
+
 # Model configuration - easily extensible for new models
 MODEL_CONFIG = {
     "244m": {
@@ -351,10 +363,13 @@ def format_annotations_table(annotations: List[Dict]) -> str:
     html += "</table>"
     return html
 
+@spaces.GPU
 def full_pipeline(prompt: str, model_choice: str, max_length: int = 2048):
     """
     Run the full pipeline from prompt to visualization with progressive updates.
     This is a generator that yields intermediate results as they become available.
+    
+    Uses @spaces.GPU decorator to ensure GPU is allocated for the entire pipeline.
     """
     
     print(f"\n{'='*60}")
@@ -490,16 +505,24 @@ def full_pipeline(prompt: str, model_choice: str, max_length: int = 2048):
 
 # Create Gradio interface
 with gr.Blocks(title="Plasmid-GPT Demo") as demo:
-    gr.Markdown("""
+    # Determine GPU status
+    gpu_status = "✅ GPU Available" if torch.cuda.is_available() else "⚠️ Running on CPU"
+    gpu_info = f"**Hardware**: {gpu_status}"
+    if HF_SPACES_GPU:
+        gpu_info += " (HuggingFace Spaces GPU)"
+    
+    gr.Markdown(f"""
     # 🧬 Plasmid-GPT: AI-Powered Plasmid Design
     
     Generate custom plasmids using natural language! This demo uses AI to convert your description 
     into a plasmid sequence, then annotates and visualizes it.
     
+    {gpu_info}
+    
     ## About the Models:
     - **244M**: Faster, good for quick iterations (~980 MB)
     - **319M**: Larger, potentially more accurate (~1.3 GB)
-    - **GPU**: Will automatically use CUDA GPU if available, otherwise runs on CPU
+    - Both models automatically use GPU when available for faster generation
     
     ## Example Prompts:
     - "Design a low copy number cloning vector with ampicillin resistance"
@@ -509,7 +532,7 @@ with gr.Blocks(title="Plasmid-GPT Demo") as demo:
     ## How it works:
     1. **Describe** your desired plasmid in natural language
     2. **AI translates** your description to special tokens (~2-5 seconds)
-    3. **Model generates** the DNA sequence (~30-60 seconds)
+    3. **Model generates** the DNA sequence (~30-60 seconds on CPU, ~10-20 seconds on GPU)
     4. **Automatic annotation** and visualization (~10-15 seconds)
     """)
     
