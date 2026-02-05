@@ -1,0 +1,80 @@
+{
+  "special_tokens": {
+    "host": [
+      "<HOST:ECOLI>",
+      "<HOST:HUMAN>",
+      "<HOST:MAMMALIAN>",
+      "<HOST:MOUSE>",
+      "<HOST:PLANT>",
+      "<HOST:RAT>",
+      "<HOST:SYNTHETIC>",
+      "<HOST:WORM>",
+      "<HOST:YEAST>"
+    ],
+    "resistance": [
+      "<RESISTANCE:AMP>",
+      "<RESISTANCE:KAN>",
+      "<RESISTANCE:SPEC>",
+      "<RESISTANCE:CHLOR>",
+      "<RESISTANCE:GENT>",
+      "<RESISTANCE:STREP>",
+      "<RESISTANCE:TET>"
+    ],
+    "length": [
+      "<LENGTH:SHORT>",
+      "<LENGTH:MEDIUM>",
+      "<LENGTH:LONG>"
+    ],
+    "gc_content": [
+      "<GC:LOW>",
+      "<GC:MEDIUM>",
+      "<GC:HIGH>"
+    ],
+    "application": [
+      "<APPLICATION:CLONING>",
+      "<APPLICATION:CRISPR>",
+      "<APPLICATION:EDITING>",
+      "<APPLICATION:EXPRESSION>",
+      "<APPLICATION:RECOMBINATION>",
+      "<APPLICATION:REPORTER>",
+      "<APPLICATION:RNAI>"
+    ],
+    "copy_number": [
+      "<COPY:HIGH>",
+      "<COPY:LOW>"
+    ],
+    "promoter": [
+      "<PROMOTER:BAD>",
+      "<PROMOTER:CAG>",
+      "<PROMOTER:CBH>",
+      "<PROMOTER:CMV>",
+      "<PROMOTER:HSYN>",
+      "<PROMOTER:LAC>",
+      "<PROMOTER:PGK>",
+      "<PROMOTER:POLYH>",
+      "<PROMOTER:SFFV>",
+      "<PROMOTER:TAC>",
+      "<PROMOTER:TRE>"
+    ],
+    "vector_type": [
+      "<VECTOR:AAV>",
+      "<VECTOR:LENTIVIRAL>",
+      "<VECTOR:RETROVIRAL>",
+      "<VECTOR:TRANSPOSON>"
+    ],
+    "tags": [
+      "<TAG:FLAG>",
+      "<TAG:GFP>",
+      "<TAG:GST>",
+      "<TAG:HA>",
+      "<TAG:HIS>",
+      "<TAG:MBP>",
+      "<TAG:MCHERRY>",
+      "<TAG:MYC>",
+      "<TAG:NLS>",
+      "<TAG:SNAP>"
+    ]
+  },
+  "description": "PlasmidGPT conditioning tokens. Based on the official model vocabulary from https://huggingface.co/McClain/plasmid-gpt-319m",
+  "version": "2.0"
+}
