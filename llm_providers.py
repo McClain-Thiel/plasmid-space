@@ -247,7 +247,7 @@ Only include categories that are mentioned or clearly implied in the description
         
         # Use OpenAI's structured output feature
         response = self.client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-5-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt}
