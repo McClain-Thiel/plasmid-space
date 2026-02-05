@@ -1,0 +1,9 @@
+gradio
+transformers
+torch
+biopython
+dna_features_viewer
+matplotlib
+openai
+pandas
+git+https://github.com/McClain-Thiel/plasmid-kit.git
